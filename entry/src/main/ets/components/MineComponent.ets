@@ -9,7 +9,7 @@ export  struct MineComponent{
         Text('我的云音乐')
           .fontSize(22)
         Image($r('app.media.ic_vip'))
-          .width(20)
+          .width(44)
       }
     }
     .width('100%')

@@ -21,7 +21,7 @@ export struct Mine {
         })
 
       }.width('100%')
-      .layoutWeight(1)
+      .height('50%')
       .columnsTemplate('1fr 1fr 1fr 1fr')
       .columnsGap(8)
       .rowsGap(8)

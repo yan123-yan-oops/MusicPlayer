@@ -69,7 +69,8 @@ export struct MomentComponent {
               .width(22)
             Text(this.item.like+'')
           }
-        }.width('100%')
+        }.width('90%')
+        .margin({right:10})
         .justifyContent(FlexAlign.SpaceBetween)
 
 

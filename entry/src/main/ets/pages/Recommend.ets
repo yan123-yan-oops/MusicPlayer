@@ -17,6 +17,14 @@ export struct Recommend {
 
   build() {
     Column({ space: 0 }) {
+
+      Row(){
+        Image($r('app.media.ic_search'))
+          .width(18)
+
+        TextInput({placeholder:'请输入歌曲名称'})
+      }.width('100%')
+
       Swiper() {
         ForEach(swiperList, (item: string) => {
           Image(item+'')
