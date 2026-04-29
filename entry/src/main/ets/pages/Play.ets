@@ -4,6 +4,7 @@ import { MusicPlayer } from '../utils/MusicPlayUtil';
 import emitter from '@ohos.events.emitter';
 import { PlayStateEvent } from '../constant/EventConstants';
 import { PlayComponentSongList } from '../components/PlayComponentSongList';
+import { PlayComponentShare } from '../components/PlayComponentShare';
 import animator, { AnimatorOptions, AnimatorResult } from '@ohos.animator';
 
 
@@ -26,6 +27,7 @@ struct Play {
   @State currentSec: number = 0
   @State totalSec: number = 0
   @State showSongList: boolean = false
+  @State showShare: boolean = false
 
   private vinylAnimator: AnimatorResult | null = null
 
@@ -104,7 +106,7 @@ struct Play {
           Image($r('app.media.ic_share'))
             .width(24)
             .onClick(() => {
-              //写分享弹窗
+              this.showShare = true
             })
         }.width('100%')
         .justifyContent(FlexAlign.SpaceBetween)
@@ -271,11 +273,21 @@ struct Play {
           ['#E89A3E', 1.0]]
       })
 
-      if (this.showSongList) { //添加的当前歌单蒙层
+      if (this.showSongList) {
         PlayComponentSongList({
           close: () => {
             this.showSongList = false
           }
+        })
+      }
+
+      if (this.showShare) {
+        PlayComponentShare({
+          close: () => {
+            this.showShare = false
+          },
+          shareName: this.song.name,
+          shareAuthor: this.song.author
         })
       }
     }

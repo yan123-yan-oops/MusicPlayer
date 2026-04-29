@@ -14,7 +14,7 @@ export class MusicPlayer {
   static duration: number = 0;//歌曲总时长
   static time: number = 0;//歌曲现在时长
   static playIndex: number = 0;
-  static playMode: 'auto' | 'repeat' | 'random' = 'random';//播放模式
+  static playMode: 'auto' | 'repeat' | 'random' = 'auto';//播放模式
   static playList: SongItemType[] = [];
 
   static async getPlayer(): Promise<media.AVPlayer> {
@@ -90,11 +90,14 @@ export class MusicPlayer {
       MusicPlayer.playMusic(currentList[nextIndex]);
 
     }else {
+      if (currentList.length === 1) {
+        MusicPlayer.playMusic(currentList[0]);
+        return;
+      }//先执行判断是否只有一首歌，防止while死循环
       let randomIdx:number
       do {
-        //currentList.lenth若为10则是返回0-9
         randomIdx = Math.floor(Math.random() * currentList.length);
-      }while (randomIdx == MusicPlayer.playIndex)//条件满足自动返回重新执行do，不需要手动
+      }while (randomIdx == MusicPlayer.playIndex)
 
       MusicPlayer.playMusic(currentList[randomIdx]);
     }
@@ -113,12 +116,14 @@ export class MusicPlayer {
       }
       MusicPlayer.playMusic(currentList[prevIndex]);
     }else {
-
+      if (currentList.length === 1) {
+        MusicPlayer.playMusic(currentList[0]);
+        return;
+      }
       let randomIdx:number
       do {
-        //currentList.lenth若为10则是返回0-9
         randomIdx = Math.floor(Math.random() * currentList.length);
-      }while (randomIdx == MusicPlayer.playIndex)//条件满足自动返回重新执行do，不需要手动
+      }while (randomIdx == MusicPlayer.playIndex)
 
       MusicPlayer.playMusic(currentList[randomIdx]);
     }
