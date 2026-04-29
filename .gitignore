@@ -1,0 +1,7 @@
+/build
+/node_modules
+/.preview
+/.hvigor
+/oh_modules
+/.idea
+*.log
